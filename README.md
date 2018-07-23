@@ -1,7 +1,3 @@
-NOTICE
-======
-What you see currently is the original code as i have not yet uploaded all of my changes. I will be making the commits as I have more time. What you see below is the most recent information as of my build 0.0.3-1 and will have at least that build's source within here as soon as I can get it uploaded.
-
 BundleIDs
 =========
 
