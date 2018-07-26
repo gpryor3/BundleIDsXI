@@ -15,6 +15,8 @@
 
 	self.view = tabView;
 
+	self.title = @"Bundle IDs";
+
 }
 
 - (void)viewDidLoad {
@@ -112,10 +114,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return [appNames count];
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	return @"Bundle IDs";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
