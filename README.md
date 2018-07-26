@@ -10,4 +10,3 @@ Bugs/Planned Updates
 
 1) App icons do not always seem to appear
 2) Support for iPhone X display (cureently fixable with NoMoreSmallApps by SparkDev)
-3) Navbar Title fixes (not showing currently)
