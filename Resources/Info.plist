@@ -1,7 +1,7 @@
 {
-    CFBundleExecutable = "BundleIDs";
+    CFBundleExecutable = "BundleIDsXI";
     CFBundleIconFile = icon.png;
-    CFBundleIdentifier = "com.sassoty.bundleids";
+    CFBundleIdentifier = "com.td.bundleidsxi";
     CFBundleInfoDictionaryVersion = 6.0;
     CFBundlePackageType = APPL;
     CFBundleSignature = "????";
@@ -12,5 +12,5 @@
     DTPlatformName = iphoneos;
     DTSDKName = iphoneos3.0;
     LSRequiresIPhoneOS = 1;
-    MinimumOSVersion = 3.0;
+    MinimumOSVersion = 11.0;
 }
