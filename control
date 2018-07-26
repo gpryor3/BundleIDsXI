@@ -1,8 +1,8 @@
-Package: BundleIDs
-Name: BundleIDs
-Version: 0.0.3
+Package: BundleIDsXI
+Name: BundleIDsXI
+Version: 0.0.5
 Architecture: iphoneos-arm
-Description: App to see installed app bundle IDs. Originally by Sassoty but updated for 64-bit/iOS 11 by TD. Special thanks to @Skittyblock and @TheTomMetzger for their help in getting this working!
+Description: App to see installed app bundle IDs.
 Maintainer: TD
 Author: TD
 Section: Utilities
