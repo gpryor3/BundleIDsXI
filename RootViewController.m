@@ -1,26 +1,29 @@
 #import "RootViewController.h"
-
 #import <AppList/AppList.h>
 
+//Determine device screen boundaries
 #define kBounds [[UIScreen mainScreen] bounds]
 
 @implementation RootViewController
 
+//Application view’s initial load?
 - (void)loadView {
 
-	tabView = [[UITableView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+	//Drawing tableView & it’s boundaries?
+	tabView = [[UITableView alloc] initWithFrame:(CGRect) kBounds];
 	tabView.delegate = self;
 	tabView.dataSource = self;
     [tabView setAlwaysBounceVertical:YES];
-
+	//Displaying the tableView?
 	self.view = tabView;
-
+	//Setting Navbar Title text
 	self.title = @"Bundle IDs";
 
 }
 
 - (void)viewDidLoad {
 
+	//hidden apps
 	NSArray* excludedApps = [[NSArray alloc] initWithObjects:
 		@"AACredentialRecoveryDialog",
 		@"AccountAuthenticationDialog",
@@ -82,8 +85,10 @@
 		@"quicklookd",
 		nil];
 	
+	//Using applist to gather installed app information
 	ALApplicationList* apps = [ALApplicationList sharedApplicationList];
 
+	//Creating Dictionary to pull app list
 	theApps = [[NSMutableDictionary alloc] init];
 	for(int i = 0; i < [apps.applications allKeys].count; i++) {
 		NSString* name = [[apps.applications allValues] objectAtIndex:i];
@@ -105,13 +110,17 @@
 
 }
 
+//Defining what happens when you tap on an app in the table view?
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	NSString* str = [theApps allKeysForObject:[appNames objectAtIndex:indexPath.row]][0];
+	//copy bundle ID to clipboard 
 	[UIPasteboard generalPasteboard].string = str;
+	//show bundle ID pop up 
 	[self showID:str];
 }
 
+//Defining the amount of rows in the tableView?
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return [appNames count];
 }
@@ -137,12 +146,16 @@
 
 }
 
+
+//Deals with the Bundle ID pop-up window
 - (void)showID:(NSString *)label {
 
 	UIWindow* window = [[UIWindow alloc] initWithFrame:kBounds];
 	window.windowLevel = UIWindowLevelStatusBar;
 
+	//pop-up width
 	int daWidth = 200;
+	//pop-up height
 	int daHeight = 90;
 	CGRect frame = CGRectMake(0,0,0,0);
 	frame.origin.x = (tabView.frame.size.width/2)-(daWidth/2);
@@ -188,11 +201,17 @@
 	preView.layer.cornerRadius = 20;
 	preView.layer.masksToBounds = YES;
 
-	UILabel* dismissLabel = [[UILabel alloc] initWithFrame:(CGRectMake((frame.size.width / 2) - 40, frame.size.height - 37, 80, 40))];
-	dismissLabel.text = @"Tap to Dismiss";
+	//Popup dismiss label properties
+	UILabel* dismissLabel = [[UILabel alloc] initWithFrame:(CGRectMake((frame.size.width / 2) - 40, frame.size.height - 40, 80, 40))];
+	//The actual text of the Popup dismiss label
+	dismissLabel.text = @"Bundle copied. Tap to Dismiss.";
+	//Popup dismiss label font size auto adjust
 	dismissLabel.adjustsFontSizeToFitWidth = YES;
-	dismissLabel.numberOfLines = 1;
+	//Popup dismiss label line count
+	dismissLabel.numberOfLines = 2;
+	//Popup dismiss label text colour
 	dismissLabel.textColor = [UIColor whiteColor];
+	//Popup dismiss label text alignment
 	dismissLabel.textAlignment = NSTextAlignmentCenter;
 
 	[preView addSubview:drawLabel];
@@ -217,6 +236,7 @@
 
 }
 
+//How the Popup window disappears from the screen?
 - (void)removeWindowNow:(UITapGestureRecognizer *)recognizer {
 	UIView* view = recognizer.view;
 	UIWindow* window = (UIWindow *)view.superview;

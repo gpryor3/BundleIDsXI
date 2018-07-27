@@ -1,6 +1,6 @@
 Package: BundleIDsXI
 Name: BundleIDsXI
-Version: 0.0.5
+Version: 0.0.7-2
 Architecture: iphoneos-arm
 Description: App to see installed app bundle IDs.
 Maintainer: TD
