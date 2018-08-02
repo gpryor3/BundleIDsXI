@@ -54,10 +54,10 @@
 		@"HealthPrivacyService",
 		@"HomeUIService",
 		@"InCallService",
-		@"Magnifier",
+		//@"Magnifier",
 		@"PhotosViewService",
 		@"PreBoard",
-		@"Print Centre",
+		//@"Print Centre",
 		@"SLGoogleAuth",
 		@"SLYahooAuth",
 		@"SafariViewService",
@@ -69,6 +69,8 @@
 		@"SoftwareUpdateUIService",
 		@"StoreDemoViewService",
 		@"User Authentication",
+		@"iCloud",
+		@"SafeMode",
 		@"VideoSubscriberAccountViewService",
 		@"WLAccessService",
 		@"Workbench Ad Tester",
@@ -140,7 +142,17 @@
 
     cell.textLabel.text = [appNames objectAtIndex:indexPath.row];
 
-    cell.accessoryView = [[UIImageView alloc] initWithImage:[[ALApplicationList sharedApplicationList] iconOfSize:ALApplicationIconSizeSmall forDisplayIdentifier:[theApps allKeysForObject:[appNames objectAtIndex:indexPath.row]][0]]];
+
+	//Setting the app icon size, colour, shape, and image
+UIImageView *imgAppIcon=[[UIImageView alloc] initWithFrame:CGRectMake(30, 5, 30, 30)];
+imgAppIcon.backgroundColor=[UIColor clearColor];
+[imgAppIcon.layer setCornerRadius:0.0f];
+[imgAppIcon.layer setMasksToBounds:YES];
+[imgAppIcon setImage:[[ALApplicationList sharedApplicationList] iconOfSize:ALApplicationIconSizeLarge forDisplayIdentifier:[theApps allKeysForObject:[appNames objectAtIndex:indexPath.row]][0]]];
+[cell.contentView addSubview:imgAppIcon];
+
+	//Show app icon on table
+    cell.accessoryView = imgAppIcon;
 
     return cell;
 
