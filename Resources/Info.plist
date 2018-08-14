@@ -1,7 +1,15 @@
 {
     CFBundleExecutable = "BundleIDsXI";
-    CFBundleIconFile = icon.png;
-    CFBundleIdentifier = "com.td.bundleidsxi";
+    CFBundleIconFile = "icon.png";
+    CFBundleIconFiles = (
+        "icon.png",
+        "icon~ipad.png",
+        "icon@2x.png",
+        "icon@2x~ipad.png",
+        "icon@3x.png",
+        "icon@3x~ipad.png"
+    );
+    CFBundleIdentifier = "com.wavelink.bundleidsxi";
     CFBundleInfoDictionaryVersion = 6.0;
     CFBundlePackageType = APPL;
     CFBundleSignature = "????";
