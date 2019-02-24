@@ -135,6 +135,8 @@ NSMutableArray *bundleIDs;
                              @"iOS Diagnostics",
                              @"iTunes",
                              @"quicklookd",
+                             @"Continuity Camera",
+                             @"SIMSetupUIService",
                              nil];
     
     //Using applist to gather installed app information
