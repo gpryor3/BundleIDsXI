@@ -2,7 +2,7 @@ Package: com.wavelink.bundleidsxi
 Name: BundleIDsXI
 Depends: applist
 Conflicts: com.td.bundleidsxi
-Version: 1.1.1-2
+Version: 1.2.0-3
 Architecture: iphoneos-arm
 Description: App to see installed app bundle IDs.
 Maintainer: TD

@@ -105,10 +105,10 @@ NSMutableArray *bundleIDs;
                              @"HealthPrivacyService",
                              @"HomeUIService",
                              @"InCallService",
-                             //@"Magnifier",
+                             @"Magnifier",
                              @"PhotosViewService",
                              @"PreBoard",
-                             //@"Print Centre",
+                             @"Print Centre",
                              @"SLGoogleAuth",
                              @"SLYahooAuth",
                              @"SafariViewService",
@@ -137,6 +137,9 @@ NSMutableArray *bundleIDs;
                              @"quicklookd",
                              @"Continuity Camera",
                              @"SIMSetupUIService",
+                             @"FTMInternal-4",
+                             @"TVAccessViewService",
+                             @"TVRemoteUIService",
                              nil];
     
     //Using applist to gather installed app information
