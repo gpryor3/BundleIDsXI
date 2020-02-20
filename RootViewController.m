@@ -140,6 +140,16 @@ NSMutableArray *bundleIDs;
                              @"FTMInternal-4",
                              @"TVAccessViewService",
                              @"TVRemoteUIService",
+                             @"AppSSOUIService",
+                             @"AuthKitUIService",
+                             @"BusinessChatViewService",
+                             @"CTNotifyUIService",
+                             @"CarPlaySplashScreeen",
+                             @"FontInstallViewService",
+                             @"SPNFCURL",
+                             @"ScreenTimeUnlock",
+                             @"iMessageAppsViewService",
+                             @"CarPlaySplashScreen",
                              nil];
     
     //Using applist to gather installed app information
@@ -186,20 +196,25 @@ NSMutableArray *bundleIDs;
     //show single bundle ID alert
     showID = [UIAlertController alertControllerWithTitle:str message:@"Copied to the clipboard" preferredStyle:UIAlertControllerStyleAlert];
     
-    //Commenting out until I can fix the crash caused by OK button dismissing the alert and dismissAlert causing crash trying to dismiss something that is no longer there
-    //UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^ (UIAlertAction *_Nonnull action) {
-    //NSLog(@"OK button is pressed");
-    //}];
-    //[showID addAction:actionOK];
+    //Adding this code back in due to popular demand. Commend out just the UIAlertAction code and after the showID if you are adding back the auto-dismiss
+    //The manual dismissal prompt for the UIAlertView
+    UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^ (UIAlertAction *_Nonnull action) {
+    NSLog(@"OK button is pressed");
+    }];
+    [showID addAction:actionOK];
     
+
     //Allowing the alert to actually be displayed
     [self presentViewController:showID animated:YES completion:nil];
+    
+    //Commenting out due to popular demand but leaving in case someone prefers it to auto-dismiss
     //Setting the timer for auto dismissing the alert
-    [NSTimer scheduledTimerWithTimeInterval:2.0
+    /*[NSTimer scheduledTimerWithTimeInterval:2.0
                                      target:self
                                    selector:NSSelectorFromString(@"dismissIDAlert")
                                    userInfo:nil
-                                    repeats:NO];
+                                    repeats:NO];*/
+                                    
 }
 
 //Defining the amount of rows in the tableView?
@@ -230,7 +245,7 @@ NSMutableArray *bundleIDs;
     imgAppIcon.backgroundColor=[UIColor clearColor];
     [imgAppIcon.layer setCornerRadius:0.0f];
     [imgAppIcon.layer setMasksToBounds:YES];
-    [imgAppIcon setImage:[[ALApplicationList sharedApplicationList] iconOfSize:ALApplicationIconSizeLarge forDisplayIdentifier:[theApps allKeysForObject:[appNames objectAtIndex:indexPath.row]][0]]];
+    [imgAppIcon setImage:[[ALApplicationList sharedApplicationList] iconOfSize:ALApplicationIconSizeSmall forDisplayIdentifier:[theApps allKeysForObject:[appNames objectAtIndex:indexPath.row]][0]]];
     [cell.contentView addSubview:imgAppIcon];
     
     //Show app icon on table
@@ -247,10 +262,12 @@ NSMutableArray *bundleIDs;
     copyAllAlert = [UIAlertController alertControllerWithTitle:@"All Bundle IDs" message:@"Copied to the clipboard" preferredStyle:UIAlertControllerStyleAlert];
     
     //Commenting out until I can fix the crash caused by OK button dismissing the alert and dismissAlert causing crash trying to dismiss something that is no longer there
-    //UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^ (UIAlertAction *_Nonnull action) {
-    //NSLog(@"OK button is pressed");
-    //}];
-    //[copyAllAlert addAction:actionOK];
+    /*
+    UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^ (UIAlertAction *_Nonnull action) {
+    NSLog(@"OK button is pressed");
+    }];
+    [copyAllAlert addAction:actionOK];
+    */
     
     
     //Allowing the alert to actually be displayed
