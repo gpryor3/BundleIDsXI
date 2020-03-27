@@ -1,7 +1,7 @@
 //BundleIDs Originally created by @NoahSaso
 //Updated in 2018 by @TD_Advocate
 //Huge thanks to @TheTomMetzger and @Skittyblock for their massive amounts of help with updating and adding new features
-//Shoutout to @xanDesign_ for making the new icon for the update
+//Shoutout to @xerusdesign for making the new icon and @EthanWhited for helping resolve an iOS 13 crash w/app icons in the table view
 
 #import "RootViewController.h"
 #import <AppList/AppList.h>
@@ -79,77 +79,80 @@ NSMutableArray *bundleIDs;
                              @"AACredentialRecoveryDialog",
                              @"AccountAuthenticationDialog",
                              @"AskPermissionUI",
-                             @"CompassCalibrationViewService",
-                             @"DDActionsService",
-                             @"DataActivation",
-                             @"DemoApp",
-                             @"FacebookAccountMigrationDialog",
-                             @"FieldTest",
-                             @"MailCompositionService",
-                             @"MessagesViewService",
-                             @"MusicUIService",
-                             @"Print Center",
-                             @"Setup",
-                             @"Siri",
-                             @"SocialUIService",
+                             @"AppSSOUIService",
+                             @"AuthKitUIService",
                              @"AXUIViewService",
                              @"Ad Platforms Diagnostics",
-                             @"CTCarrierSpaceAuth",
+                             @"BusinessChatViewService",
+                             @"CarPlaySplashScreen",
                              @"CheckerBoard",
+                             @"CompassCalibrationViewService",
+                             @"Continuity Camera",
+                             @"CTCarrierSpaceAuth",
+                             @"CTNotifyUIService",
+                             @"DataActivation",
+                             @"DDActionsService",
+                             @"DemoApp",
                              @"Diagnostics",
                              @"DiagnosticsService",
                              @"Do Not Disturb While Driving",
+                             @"FacebookAccountMigrationDialog",
                              @"Family",
+                             @"FieldTest",
                              @"FieldTestMenu",
+                             @"FontInstallViewService",
+                             @"FTMInternal-4",
                              @"Game Center UI Service",
                              @"HealthPrivacyService",
                              @"HomeUIService",
+                             @"iAd",
+                             @"iAdOptOut",
+                             @"iCloud",
+                             @"iMessageAppsViewService",
                              @"InCallService",
+                             @"iOS Diagnostics",
+                             @"iTunes",
                              @"Magnifier",
+                             @"MailCompositionService",
+                             @"MessagesViewService",
+                             @"MusicUIService",
                              @"PhotosViewService",
                              @"PreBoard",
+                             @"Print Center",
                              @"Print Centre",
-                             @"SLGoogleAuth",
-                             @"SLYahooAuth",
+                             @"quicklookd",
+                             @"RemoteiCloudQuotaUI",
                              @"SafariViewService",
+                             @"SafeMode",
                              @"ScreenSharingViewService",
+                             @"Screenshots",
                              @"ScreenshotServicesService",
+                             @"ScreenTimeUnlock",
                              @"Server Drive",
+                             @"Setup",
                              @"SharedWebCredentialViewService",
                              @"SharingViewService",
+                             @"SIMSetupUIService",
+                             @"Siri",
+                             @"Siri Search",
+                             @"SLGoogleAuth",
+                             @"SLYahooAuth",
+                             @"SocialUIService",
                              @"SoftwareUpdateUIService",
+                             @"SPNFCURL",
                              @"StoreDemoViewService",
-                             @"User Authentication",
-                             @"iCloud",
-                             @"SafeMode",
-                             @"VideoSubscriberAccountViewService",
-                             @"WLAccessService",
-                             @"Workbench Ad Tester",
                              @"TencentWeiboAccountMigrationDialog",
                              @"TrustMe",
+                             @"TVAccessViewService",
+                             @"TVRemoteUIService",
+                             @"User Authentication",
+                             @"VideoSubscriberAccountViewService",
+                             @"Web",
                              @"WebContentAnalysisUI",
                              @"WebSheet",
                              @"WebViewService",
-                             @"iAd",
-                             @"iAdOptOut",
-                             @"iOS Diagnostics",
-                             @"iTunes",
-                             @"quicklookd",
-                             @"Continuity Camera",
-                             @"SIMSetupUIService",
-                             @"FTMInternal-4",
-                             @"TVAccessViewService",
-                             @"TVRemoteUIService",
-                             @"AppSSOUIService",
-                             @"AuthKitUIService",
-                             @"BusinessChatViewService",
-                             @"CTNotifyUIService",
-                             @"CarPlaySplashScreeen",
-                             @"FontInstallViewService",
-                             @"SPNFCURL",
-                             @"ScreenTimeUnlock",
-                             @"iMessageAppsViewService",
-                             @"CarPlaySplashScreen",
+                             @"Workbench Ad Tester",
+                             @"WLAccessService",
                              nil];
     
     //Using applist to gather installed app information
@@ -190,13 +193,13 @@ NSMutableArray *bundleIDs;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSString* str = [theApps allKeysForObject:[appNames objectAtIndex:indexPath.row]][0];
-    //copy bundle ID to clipboard
+    //copy single selected application bundle ID to clipboard
     [UIPasteboard generalPasteboard].string = str;
     
     //show single bundle ID alert
     showID = [UIAlertController alertControllerWithTitle:str message:@"Copied to the clipboard" preferredStyle:UIAlertControllerStyleAlert];
     
-    //Adding this code back in due to popular demand. Commend out just the UIAlertAction code and after the showID if you are adding back the auto-dismiss
+    //Adding this code back in due to popular demand. Comment out just the UIAlertAction code and after the showID if you are adding back the auto-dismiss
     //The manual dismissal prompt for the UIAlertView
     UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^ (UIAlertAction *_Nonnull action) {
     NSLog(@"OK button is pressed");
@@ -217,7 +220,7 @@ NSMutableArray *bundleIDs;
                                     
 }
 
-//Defining the amount of rows in the tableView?
+//Defining the amount of rows in the tableView based on installed application count
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [appNames count];
 }
@@ -261,7 +264,7 @@ NSMutableArray *bundleIDs;
     //show copy all bundle IDs alert
     copyAllAlert = [UIAlertController alertControllerWithTitle:@"All Bundle IDs" message:@"Copied to the clipboard" preferredStyle:UIAlertControllerStyleAlert];
     
-    //Commenting out until I can fix the crash caused by OK button dismissing the alert and dismissAlert causing crash trying to dismiss something that is no longer there
+    //Commenting out due to crash caused by OK button dismissing the alert and dismissAlert trying to dismiss something that is no longer there
     /*
     UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^ (UIAlertAction *_Nonnull action) {
     NSLog(@"OK button is pressed");
@@ -282,10 +285,14 @@ NSMutableArray *bundleIDs;
     //All non-hidden bundle IDs to be copied
     NSString* copiedAllString = @"";
     for (int i=0; i < bundleIDs.count; i ++) {
-        /*TOMEDIT*/
-        NSString *bundleID = [NSString stringWithFormat:@"%@\n", bundleIDs[i]];
-        copiedAllString = [copiedAllString stringByAppendingString:bundleID];
-        //copiedAllString += "\n";
+        //Create the string of all application names
+        NSString *allNames = [NSString stringWithFormat:@"%@\n", appNames[i]];
+        //Add the string of application names to the copied all string
+        copiedAllString = [copiedAllString stringByAppendingString:allNames];
+        //Create the string of all application bundle IDs
+        NSString *allBundles = [NSString stringWithFormat:@"%@\n", bundleIDs[i]];
+        //Add the string of application bundle IDs to the copied all string
+        copiedAllString = [copiedAllString stringByAppendingString:allBundles];
     }
     
     //copy all bundle IDs to clipboard
